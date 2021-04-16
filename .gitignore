@@ -6,3 +6,4 @@
 *.xlsx
 tmp.*
 /.coverage
+__pycache__/
