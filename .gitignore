@@ -1,0 +1,8 @@
+/venv
+/.idea
+/.pytest_cache
+*.local
+*.json
+*.xlsx
+tmp.*
+/.coverage

@@ -1,0 +1,30 @@
+version: '3.6'
+
+services:
+  cian-parse-flats-app:
+    build: .
+    container_name: "cian-parse-flats"
+    depends_on:
+      - db
+    environment:
+      TG_BOT_TOKEN: test
+      TG_NOTIFICATION_CHANNEL_NAME: -123456
+      CIAN_URL_TO_REQUEST: https://api.cian.ru/search-offers/v2/search-offers-desktop/
+      DB_URL: postgresql://test:test@db:5432/test
+    ports:
+      - 8080:8080
+    command: python3 server.py --host="0.0.0.0"
+    restart: always
+
+  db:
+    container_name: "offers-db"
+    environment:
+      POSTGRES_USER: test
+      POSTGRES_PASSWORD: test
+      POSTGRES_DB: test
+    image: postgres:latest
+    ports:
+      - 5432:5432
+    restart: always
+    volumes:
+      - ./db_set_up/db_scheme.sql:/docker-entrypoint-initdb.d/db_scheme.sql
